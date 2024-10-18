@@ -1,0 +1,1 @@
+si borras este archivo visualmente las sub-carpetas se veran extrañas, no borrar por tu propio bien visualmente
