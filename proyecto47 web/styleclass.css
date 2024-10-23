@@ -1,0 +1,151 @@
+.style-class {
+    background: linear-gradient(to bottom, black, blue);
+    height: 150vh; /* Asegura que el degradado cubra toda la altura de la pantalla */
+    margin: 0; /* Elimina los márgenes predeterminados del cuerpo */
+    overflow-x: hidden;
+}
+.class-card {
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.class-card:hover {
+    transform: translateY(-5px);
+}
+
+.class-header {
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.class-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.class-title {
+    position: relative;
+    z-index: 1;
+}
+
+.modal-header-custom {
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+}
+
+.modal-title-custom {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.trabajos-section {
+    margin-bottom: 20px;
+}
+
+.trabajos-section h6 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.personas-section h6 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+#classContainer {
+    gap: 1.5rem;
+}
+
+.chat-messages1 {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    max-width: 70%;
+    display: flex;
+    align-items: flex-start;
+}
+
+.chat-message.sent {
+    background-color: #007bff;
+    color: white;
+    margin-left: auto;
+    flex-direction: row-reverse;
+}
+
+.chat-message.received {
+    background-color: #f1f1f1;
+}
+
+.chat-message .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+
+.chat-message .message-content {
+    flex-grow: 1;
+}
+
+.delete-class {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.delete-class:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.file-upload-btn {
+    cursor: pointer;
+}
+
+.file-message {
+    display: flex;
+    align-items: center;
+}
+
+.file-message i {
+    margin-right: 5px;
+}
+
+.diagonal-overlay {
+    position: fixed;
+    /* Or absolute, depending on your layout */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, rgb(107, 107, 255) 57%, white 50%);
+    z-index: -1;
+    /* Place it behind other content */
+}
