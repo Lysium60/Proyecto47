@@ -1,0 +1,55 @@
+.node {
+    margin-left: 20px;
+    border-left: 1px solid #ccc;
+    padding-left: 10px;
+    transition: all 0.3s ease;
+}
+.node-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.color-picker {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.color-picker::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+.color-picker::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+}
+.collapsed > .children {
+    display: none;
+}
+.drag-handle {
+    cursor: move;
+    padding: 5px;
+    margin-right: 5px;
+}
+.node-buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+.node-buttons button {
+    margin: 2px;
+}
+.file-list {
+    margin-top: 5px;
+    font-size: 0.8em;
+}
+.file-item {
+    display: inline-block;
+    margin-right: 10px;
+    background-color: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+}

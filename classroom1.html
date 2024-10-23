@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom con Calendario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="styleclass.css" rel="stylesheet">
+    <link href="styleconstant.css" rel="stylesheet">
+    <script src="jsclass.js"></script>
+    <script src="javascriptconstant.js"></script>
+    <script src="jscalendar.js"></script>
+</head>
+
+<body class="style-class">
+    <div id="chatSidebar" class="chat-sidebar">
+        <div class="d-flex justify-content-between align-items-center p-3 border-bottom border-secondary">
+            <h5 class="mb-0">Chat</h5>
+        </div>
+        <div id="chatMessages" class="chat-messages p-3">
+            <!-- Los mensajes del chat se insertarán aquí -->
+        </div>
+        <div class="chat-input">
+            <div class="input-group">
+                <input type="text" id="messageInput" class="form-control bg-dark text-white"
+                    placeholder="Escribe un mensaje...">
+                <button class="btn btn-outline-secondary text-white" type="button" id="voiceInputBtn">
+                    <i class="bi bi-mic"></i>
+                </button>
+                <button class="btn btn-outline-secondary text-white" type="button" id="sendMessageBtn">
+                    <i class="bi bi-send"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainContent" class="main-content">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html"><img class="rounded-circle" alt="Logo" src="logo.png"
+                        style="width: 75px; height: 75px;"></a>
+                </ul>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-light" href="index.html">Gestor de archivos</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-light" href="classroom1.html">Classroom</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-light" href="#">Materias/Notas</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link " href="view-blogs.html">Tus Blogs</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <button class="btn btn-outline-secondary me-2">
+                            <i class="bi bi-bell"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary me-2">
+                            <i class="bi bi-upload"></i>
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                <li><a class="dropdown-item" href="#">Configuración</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="login.html">Cerrar sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <main class="container-fluid mt-5">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="classContainer">
+                        <!-- Las tarjetas de clase se generarán dinámicamente aquí -->
+                    </div>
+                    <div class="col">
+                        <button id="addClassBtn" class="btn btn-outline-light btn-lg">Agregar nueva clase</button>
+                    </div>
+                </div>
+                <div class="col-md-3" id="calendarContainer">
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <h2 class="text-2xl font-bold mb-4">Calendario de Eventos</h2>
+                        <div id="calendar" class="mb-4"></div>
+                        <div class="mb-4">
+                            <label for="eventTitle" class="form-label">Nuevo Evento</label>
+                            <div class="input-group">
+                                <input type="text" id="eventTitle" class="form-control" placeholder="Título del evento">
+                                <input type="date" id="eventDate" class="form-control">
+                                <button id="addEventBtn" class="btn btn-primary">Agregar</button>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Eventos Próximos</h3>
+                            <ul id="eventList" class="list-group"></ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Los modales se generarán dinámicamente aquí -->
+                <div id="modalContainer"></div>
+
+                <!-- Modal para agregar nueva clase -->
+                <div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addClassModalLabel">Agregar nueva clase</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="addClassForm">
+                                    <div class="mb-3">
+                                        <label for="className" class="form-label">Nombre de la materia</label>
+                                        <input type="text" class="form-control" id="className" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="classPeriod" class="form-label">Periodo</label>
+                                        <input type="text" class="form-control" id="classPeriod" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="classTeacher" class="form-label">Nombre del profesor</label>
+                                        <input type="text" class="form-control" id="classTeacher" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="classBackgroundImage" class="form-label">Imagen de fondo (URL o
+                                            archivo)</label>
+                                        <input type="file" class="form-control" id="classBackgroundImage"
+                                            accept="image/*">
+                                        <input type="text" class="form-control mt-2" id="classBackgroundImageUrl"
+                                            placeholder="O ingrese una URL de imagen">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="classTeacherImage" class="form-label">Foto de perfil del profesor
+                                            (URL o
+                                            archivo)</label>
+                                        <input type="file" class="form-control" id="classTeacherImage" accept="image/*">
+                                        <input type="text" class="form-control mt-2" id="classTeacherImageUrl"
+                                            placeholder="O ingrese una URL de imagen">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary btn-lg" id="saveNewClass">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

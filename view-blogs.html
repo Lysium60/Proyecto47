@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts Guardados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="styleconstant.css" rel="stylesheet">
+    <link href="styleblogs.css" rel="stylesheet">
+    <script src="javascriptconstant.js"></script>
+   <style>
+    body {
+    background: linear-gradient(to bottom, black, blue);
+    height: 100vh; /* Asegura que el degradado cubra toda la altura de la pantalla */
+    margin: 0; /* Elimina los márgenes predeterminados del cuerpo */
+    overflow-x: hidden;
+}
+   </style>
+</head>
+
+<body>
+    <div id="chatSidebar" class="chat-sidebar">
+        <div class="d-flex justify-content-between align-items-center p-3 border-bottom border-secondary">
+            <h5 class="mb-0">Chat</h5>
+        </div>
+        <div id="chatMessages" class="chat-messages p-3">
+            <!-- Los mensajes del chat se insertarán aquí -->
+        </div>
+        <div class="chat-input">
+            <div class="input-group">
+                <input type="text" id="messageInput" class="form-control bg-dark text-white"
+                    placeholder="Escribe un mensaje...">
+                <button class="btn btn-outline-secondary text-white" type="button" id="voiceInputBtn">
+                    <i class="bi bi-mic"></i>
+                </button>
+                <button class="btn btn-outline-secondary text-white" type="button" id="sendMessageBtn">
+                    <i class="bi bi-send"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="mainContent" class="main-content">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img class="rounded-circle" alt="Logo" src="logo.png" style="width: 75px; height: 75px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-light" href="index.html">Gestor de archivos</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-light" href="classroom1.html">Classroom</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-light" href="#">Materias/Notas</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-light" href="view-blogs.html">Tus Blogs</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <button class="btn btn-outline-secondary me-2">
+                            <i class="bi bi-bell"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary me-2">
+                            <i class="bi bi-upload"></i>
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                <li><a class="dropdown-item" href="#">Configuración</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="login.html">Cerrar sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        </nav>
+        <main class="container-fluid mt-4">
+            <div class="container mt-4">
+                <h2 class="text-light">Posts Guardados</h2>
+                <div class="mt-4 mb-4">
+                    <div class="input-group">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Buscar posts...">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Filtrar</button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" data-filter="all">Todos</a></li>
+                            <li><a class="dropdown-item" href="#" data-filter="with-file">Con archivo</a></li>
+                            <li><a class="dropdown-item" href="#" data-filter="without-file">Sin archivo</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="postList" class="row row-cols-1 row-cols-md-3 g-4"></div>
+            </div>
+
+            <!-- Modal para vista detallada -->
+            <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="postModalLabel">Detalles del Post</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="postModalBody">
+                            <!-- El contenido del post se insertará aquí -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+        let posts = JSON.parse(localStorage.getItem('posts')) || [];
+        const postList = document.getElementById('postList');
+        const postModal = new bootstrap.Modal(document.getElementById('postModal'));
+        const postModalBody = document.getElementById('postModalBody');
+        const searchInput = document.getElementById('searchInput');
+        const filterDropdown = document.querySelector('.dropdown-menu');
+        let currentFilter = 'all';
+
+        function renderPosts(filteredPosts = posts) {
+            postList.innerHTML = '';
+            filteredPosts.forEach((post, index) => {
+                const postElement = document.createElement('div');
+                postElement.className = 'col';
+                postElement.innerHTML = `
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">${post.title}</h5>
+                    <p class="card-text"><small class="text-muted">Creado: ${new Date(post.createdAt).toLocaleString()}</small></p>
+                    ${post.fileName ? `<p class="card-text"><small class="text-muted">Archivo adjunto: ${post.fileName}</small></p>` : ''}
+                    <div class="card-preview">
+                        <p class="card-text">${post.content.substring(0, 100)}${post.content.length > 100 ? '...' : ''}</p>
+                        <button class="btn btn-sm btn-primary" onclick="showPostDetails(${index})">Ver más</button>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="edit-blog.html?edit=${index}" class="btn btn-sm btn-warning me-2">Editar</a>
+                    <button class="btn btn-sm btn-outline-danger" onclick="deletePost(${index})">Eliminar</button>
+                </div>
+            </div>
+        `;
+                postList.appendChild(postElement);
+            });
+        }
+
+        function showPostDetails(index) {
+            const post = posts[index];
+            postModalBody.innerHTML = `
+        <h2>${post.title}</h2>
+        <p><small class="text-muted">Creado: ${new Date(post.createdAt).toLocaleString()}</small></p>
+        <p>${post.content}</p>
+        ${post.fileName ? `
+            <div class="mt-3">
+                <h5>Archivo adjunto:</h5>
+                <p>${post.fileName} (${(post.fileSize / 1024).toFixed(2)} KB)</p>
+                <a href="${post.fileData}" download="${post.fileName}" class="btn btn-primary">Descargar archivo</a>
+            </div>
+        ` : ''}
+    `;
+            postModal.show();
+        }
+
+        function deletePost(index) {
+            if (confirm('¿Estás seguro de que quieres eliminar este post?')) {
+                posts.splice(index, 1);
+                localStorage.setItem('posts', JSON.stringify(posts));
+                renderPosts();
+            }
+        }
+
+        function filterPosts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredPosts = posts.filter(post => {
+                const matchesSearch = post.title.toLowerCase().includes(searchTerm) ||
+                    post.content.toLowerCase().includes(searchTerm);
+                if (currentFilter === 'all') return matchesSearch;
+                if (currentFilter === 'with-file') return matchesSearch && post.fileName;
+                if (currentFilter === 'without-file') return matchesSearch && !post.fileName;
+            });
+            renderPosts(filteredPosts);
+        }
+
+        searchInput.addEventListener('input', filterPosts);
+
+        filterDropdown.addEventListener('click', (e) => {
+            if (e.target.classList.contains('dropdown-item')) {
+                e.preventDefault();
+                currentFilter = e.target.dataset.filter;
+                filterPosts();
+            }
+        });
+
+        renderPosts();
+    </script>
+
+
+</body>
+
+</html>
